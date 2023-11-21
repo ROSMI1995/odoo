@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="record_payment_report_print_template">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <style type="text/css">
+                        .table_main_head {
+                        font-weight: bold;
+                        }
+                        .table_head_border {
+                        border-top : 1px solid black;
+                        border-bottom : 1px solid black;
+                        border-left : 1px solid black;
+                        border-right : 1px solid black;
+                        vertical-align : middle;
+                        text-align : center;
+                        font-weight: bold;
+                        }
+                        .table_body_border {
+                        border-top : 1px solid black;
+                        border-bottom : 1px solid black;
+                        border-left : 1px solid black;
+                        border-right : 1px solid black;
+                        vertical-align : middle;
+                        }
+                    </style>
+                    <div class="page">
+                        <table width="100%">
+                            <tr>
+                                <td colspan="4" class="table_main_head" align="center" style="font-size: 20px;">
+                                    <u>Customer Payment Report</u>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-top: 50px;"/>
+                            </tr>
+                            <tr>
+                                <td class="table_main_head" width="15%">Date From</td>
+                                <td>:&#160;&#160;<span t-esc="date_from"/>
+                                </td>
+                                <td class="table_main_head" width="15%">Date To</td>
+                                <td>:&#160;&#160;<span t-esc="date_to"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <table width="100%">
+                            <thead>
+                                <tr>
+                                    <td class="table_head_border">Sl.No</td>
+                                    <td class="table_head_border">Customer Name</td>
+                                    <td class="table_head_border">First sales date</td>
+                                    <td class="table_head_border">Total sale count</td>
+                                    <td class="table_head_border">Total amount</td>
+                                    <td class="table_head_border">Paid amount</td>
+                                    <td class="table_head_border">Balance amount</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="sl_no" t-value="0"/>
+                                <t t-foreach="vals" t-as="v">
+                                    <t t-set="sl_no" t-value="sl_no + 1"/>
+                                    <tr>
+                                        <td class="table_body_border" align="center">
+                                            <span t-esc="sl_no"/>
+                                        </td>
+                                        <td class="table_body_border" style="padding-left: 7px;">
+                                            <span t-esc="v['partner_name']"/>
+                                        </td>
+                                        <td class="table_body_border" align="center" style="padding-right: 7px;">
+                                            <span t-esc="v['first_sales_date']"/>
+                                        </td>
+                                        <td class="table_body_border" align="center" style="padding-right: 7px;">
+                                            <span t-esc="v['total_sale_count']" t-field-options='{"widget": "monetary"}'/>
+                                        </td>
+                                        <td class="table_body_border" align="center" style="padding-right: 7px;">
+                                            <span t-esc="v['total_amount']" t-field-options='{"widget": "monetary"}'/>
+                                        </td>
+                                        <td class="table_body_border" align="right" style="padding-right: 7px;">
+                                            <span t-esc="v['total_paid_amount']"/>
+                                        </td>
+                                        <td class="table_body_border" align="center" style="padding-right: 7px;">
+                                            <span t-esc="v['balance_amount']" t-field-options='{"widget": "monetary"}'/>
+                                        </td>
+
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="footer o_standard_footer">
+                        <div class="row text-center">
+                            <div class="col col-12 text-center">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item">
+                                        <span class="page"/>
+                                    </li>
+                                    <li class="list-inline-item">/</li>
+                                    <li class="list-inline-item">
+                                        <span class="topage"/>
+                                    </li>
+                                    <li>
+                                        <span t-esc="user.name"/>&#160;-&#160;
+                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
