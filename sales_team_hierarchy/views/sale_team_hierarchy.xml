@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="view_sale_team_hierarchy_form" model="ir.ui.view">
+            <field name="name">sale.team.hierarchy.form</field>
+            <field name="model">sale.team.hierarchy</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="parent_id"/>
+                        <field name="team_ids" widget="many2many_tags"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="view_sale_team_hierarchy_tree" model="ir.ui.view">
+            <field name="name">sale.team.hierarchy.tree</field>
+            <field name="model">sale.team.hierarchy</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="parent_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_sale_team_hierarchy" model="ir.actions.act_window">
+            <field name="name">Sales Team Hierarchy</field>
+            <field name="res_model">sale.team.hierarchy</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="menu_sale_team_hierarchy" name="Sales Team Hierarchy" parent="crm.crm_menu_config" action="action_sale_team_hierarchy"/>
+    </data>
+</odoo>
